@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Derya'nın Almanca Sitesi</title>
+<title>Derya's Deutsch</title>
 <style>
 body {
   margin:0;
   font-family:'Arial',sans-serif;
-  background:#dff6f0;
+  background:linear-gradient(180deg,#1fbbd1,#1f4f8b);
   overflow-x:hidden;
   color:#000;
+  transition:background 2s ease;
   position:relative;
 }
 
-/* Hamburger Menü */
+/* Menü Çubuğu */
 .menu-bar {
   background:#00bfff;
   padding:10px 20px;
@@ -25,99 +26,38 @@ body {
   top:0; left:0; width:100%;
   z-index:100;
 }
-.menu-bar h1 {color:white; font-size:22px; margin:0;}
-.hamburger {
-  cursor:pointer;
-  width:30px;
-  height:22px;
-  position:relative;
-}
-.hamburger div {
-  background:white;
-  height:4px;
-  margin:4px 0;
-  border-radius:2px;
-  transition:0.3s;
-}
-.nav-links {
-  display:none;
-  flex-direction:column;
-  background:#00bfff;
-  position:absolute;
-  top:50px; left:0; width:100%;
-}
-.nav-links button {
-  background:none;
-  border:none;
-  color:white;
-  padding:12px;
-  font-size:16px;
-  text-align:left;
-  cursor:pointer;
-}
+.menu-bar h1 {color:white; font-size:28px; margin:0; font-weight:bold;}
+.hamburger {cursor:pointer; width:30px; height:22px; position:relative;}
+.hamburger div {background:white; height:4px; margin:4px 0; border-radius:2px; transition:0.3s;}
+.nav-links {display:none; flex-direction:column; background:#00bfff; position:absolute; top:50px; left:0; width:100%;}
+.nav-links button {background:none; border:none; color:white; padding:12px; font-size:16px; text-align:left; cursor:pointer;}
 .nav-links button:hover {background:#0099cc;}
 
 /* Ana Sayfa */
-.home-container {
-  text-align:center;
-  padding:120px 20px 50px 20px;
-  position:relative;
-}
-.typewriter {
-  overflow:hidden;
-  border-right:.15em solid #ffcc00;
-  white-space:nowrap;
-  margin:0 auto;
-  letter-spacing:.05em;
-  animation: typing 4s steps(30,end), blink-caret 0.75s step-end infinite;
-  font-size:28px;
-  font-weight:bold;
-  max-width:90%;
-}
+.home-container {text-align:center; padding:120px 20px 50px 20px; position:relative;}
+.typewriter {overflow:hidden; border-right:.15em solid #ffcc00; white-space:nowrap; margin:0 auto; letter-spacing:.05em; animation: typing 4s steps(30,end), blink-caret 0.75s step-end infinite; font-size:32px; font-weight:bold; max-width:90%; color:white;}
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;}50%{border-color:#ffcc00;} }
-.subtext { font-size:18px; margin:15px 0; color:#333; font-weight:bold; }
-.btn {
-  background-color:#ffcc00; border:none;
-  padding:12px 25px; font-size:16px; border-radius:10px;
-  cursor:pointer; transition: transform 0.3s, background-color 0.3s;
-  margin:5px;
-}
+.subtext { font-size:18px; margin:15px 0; color:#fff; font-weight:bold; }
+.btn { background-color:#ffcc00; border:none; padding:12px 25px; font-size:16px; border-radius:10px; cursor:pointer; transition: transform 0.3s, background-color 0.3s; margin:5px;}
 .btn:hover { background-color:#ff9900; transform:scale(1.05); }
 
-/* Bayrak */
-.german-flag {
-  position:fixed; top:15px; right:15px;
-  width:90px; height:auto; z-index:101;
-  border-radius:5px; box-shadow:0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Su kabarcıkları */
-.bubble-container {
-  position:absolute; bottom:0; width:100%; height:300px;
-  pointer-events:none; overflow:hidden;
-}
-.bubble {
-  position:absolute; bottom:0; background: rgba(255,255,255,0.5); border-radius:50%;
-  animation: rise linear infinite;
-}
+/* Su Kabarcıkları + Dalga */
+.bubble-container {position:absolute; bottom:0; width:100%; height:300px; pointer-events:none; overflow:hidden;}
+.bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.4); border-radius:50%; animation: rise linear infinite, swing ease-in-out infinite;}
 .bubble1 { width:12px; height:12px; left:10%; animation-duration:6s; animation-delay:0s;}
 .bubble2 { width:20px; height:20px; left:25%; animation-duration:8s; animation-delay:1s;}
 .bubble3 { width:15px; height:15px; left:40%; animation-duration:5s; animation-delay:2s;}
 .bubble4 { width:25px; height:25px; left:60%; animation-duration:7s; animation-delay:0.5s;}
 .bubble5 { width:18px; height:18px; left:80%; animation-duration:9s; animation-delay:1.5s;}
 @keyframes rise { 0%{transform:translateY(0); opacity:0.5;}50%{opacity:0.7;}100%{transform:translateY(-300px); opacity:0;} }
+@keyframes swing {0%,100%{transform:translateX(0);}50%{transform:translateX(15px);}}
 
-/* Kart Sistemi */
+/* Kartlar */
 .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:20px; }
-.card {
-  padding:18px; border-radius:12px; text-align:center; font-weight:bold;
-  cursor:pointer; transition: transform 0.2s, box-shadow 0.3s;
-  color:white;
-  position:relative;
-}
+.card { padding:18px; border-radius:12px; text-align:center; font-weight:bold; cursor:pointer; transition: transform 0.2s, box-shadow 0.3s; color:white; position:relative;}
 .card:hover {transform:scale(1.05); box-shadow:0 0 15px rgba(0,0,0,0.3);}
-.card.der {background:#00bfff; color:#000;}
+.card.der {background:#2196f3; color:#000;}
 .card.die {background:#ff69b4; color:#fff;}
 .card.das {background:#ffd700; color:#000;}
 .card.noArticle {background: #888888; color:white;}
@@ -135,18 +75,15 @@ body {
 .progress-bar {background:#ddd; border-radius:10px; overflow:hidden; margin:10px 0;}
 .progress-fill {background:#00bfff; height:20px; width:40%; color:white; text-align:center; line-height:20px;}
 
-/* Responsive */
-@media (max-width:768px) { .card-grid {grid-template-columns:repeat(auto-fit,minmax(120px,1fr));} .typewriter{font-size:22px;} }
+@media (max-width:768px) { .card-grid {grid-template-columns:repeat(auto-fit,minmax(120px,1fr));} .typewriter{font-size:24px;} }
 </style>
 </head>
 <body>
 
-<!-- Menü Çubuğu -->
+<!-- Menü -->
 <div class="menu-bar">
-  <h1>Derya's Deutsch</h1>
-  <div class="hamburger" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
+  <h1>DK</h1>
+  <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <div class="nav-links" id="navLinks">
     <button onclick="openTabByName('Home')">Anasayfa</button>
     <button onclick="openTabByName('About')">Hakkımda</button>
@@ -160,16 +97,11 @@ body {
   </div>
 </div>
 
-<!-- Bayrak -->
-<img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" class="german-flag" alt="Alman Bayrağı">
-
 <!-- Ana Sayfa -->
 <div id="Home" class="tabcontent">
   <div class="home-container">
-    <h1 class="typewriter">Hoşgeldiniz! Ben Derya</h1>
-    <p class="subtext">Almanca öğrenme yolculuğunuz burada başlıyor!</p>
-    <img src="https://img.icons8.com/color/96/000000/open-book.png" alt="Kitap" style="margin:10px;">
-    <img src="https://img.icons8.com/color/96/000000/notebook.png" alt="Defter" style="margin:10px;">
+    <h1 class="typewriter">Merhaba! Ben Derya</h1>
+    <p class="subtext">Almanca öğrenme yolculuğunuz burada başlıyor! 🌍</p>
     <div>
       <button class="btn" onclick="openTabByName('Learn')">Öğrenmeye Başla</button>
       <button class="btn" onclick="openTabByName('Games')">Oyunları Deneyin</button>
@@ -187,20 +119,22 @@ body {
 <!-- Hakkımda -->
 <div id="About" class="tabcontent">
   <h2>Hakkımda</h2>
-  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi, öğrendiğim bilgileri paylaşmak ve Almanca öğrenmek isteyen herkese ilham vermek amacıyla oluşturdum.</p>
-  <p>Almanca öğrenmek, sadece yeni bir dil öğrenmek değil; farklı kültürleri tanımak, dünyayı daha iyi anlamak ve kendini geliştirmek demektir. Her gün biraz çalışın ve pes etmeyin!</p>
+  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi, öğrendiğim bilgileri paylaşmak ve Almanca öğrenmek isteyen herkese ilham vermek için oluşturdum.</p>
+  <p>Almanca öğrenmek, sadece dil değil; farklı kültürleri keşfetmek, dünyayı daha iyi anlamak ve ufkunuzu genişletmek demektir. Her gün biraz çalışın ve pes etmeyin! 🌏</p>
 </div>
 
 <!-- Öğrenme -->
 <div id="Learn" class="tabcontent">
   <h2>Öğrenme</h2>
   <div class="card-grid" id="wordCards"></div>
+  <h2>Cümleler</h2>
+  <div class="card-grid" id="sentenceCards"></div>
 </div>
 
 <!-- Quiz -->
 <div id="Quiz" class="tabcontent">
-  <h2>Quiz Örnek</h2>
-  <p>Soru: “Mann” kelimesinin anlamı nedir?</p>
+  <h2>Quiz</h2>
+  <p>Soru örneği: “Mann” kelimesinin anlamı nedir?</p>
   <button class="game-card" onclick="alert('Doğru!')">Adam</button>
   <button class="game-card" onclick="alert('Yanlış!')">Ev</button>
   <button class="game-card" onclick="alert('Yanlış!')">Kadın</button>
@@ -241,29 +175,19 @@ body {
   <ul>
     <li><a href="https://www.goethe.de" target="_blank">Goethe Institut</a></li>
     <li><a href="https://www.dw.com/deutsch-lernen/s-2055" target="_blank">DW Learn German</a></li>
+    <li><a href="https://www.duolingo.com/course/de/tr/Learn-German" target="_blank">Duolingo</a></li>
+    <li><a href="https://www.youtube.com/@begibegi" target="_blank">BegiBegi YouTube</a></li>
     <li>Almanca A1 Kitapları (Schritte, Menschen, Netzwerk)</li>
   </ul>
 </div>
 
 <script>
-// Hamburger Menü
-function toggleMenu() {
-  const nav = document.getElementById('navLinks');
-  if(nav.style.display === 'flex'){ nav.style.display='none'; }
-  else{ nav.style.display='flex'; }
-}
-
-// Sekmeler
-function openTabByName(tabName){
-  let tabcontent=document.getElementsByClassName("tabcontent");
-  for(let i=0;i<tabcontent.length;i++) tabcontent[i].style.display="none";
-  document.getElementById(tabName).style.display="block";
-}
-
-// Default aç
+// Menü
+function toggleMenu() { const nav = document.getElementById('navLinks'); nav.style.display = (nav.style.display==='flex')?'none':'flex'; }
+function openTabByName(tabName){ let tab=document.getElementsByClassName("tabcontent"); for(let i=0;i<tab.length;i++) tab[i].style.display="none"; document.getElementById(tabName).style.display="block"; }
 openTabByName('Home');
 
-// Örnek kelimeler ve sesler
+// 50 Kelime Örnek (audio/mp3 dosyalarını kendi sunucuna koy)
 const words = [
   {word:"Mann",meaning:"Adam",article:"der",img:"https://img.icons8.com/color/48/000000/user.png",audio:"audio/mann.mp3"},
   {word:"Frau",meaning:"Kadın",article:"die",img:"https://img.icons8.com/color/48/000000/woman.png",audio:"audio/frau.mp3"},
@@ -271,13 +195,17 @@ const words = [
   {word:"Tisch",meaning:"Masa",article:"noArticle",img:"https://img.icons8.com/color/48/000000/table.png",audio:"audio/tisch.mp3"}
 ];
 const wordContainer=document.getElementById("wordCards");
-words.forEach(w=>{
-  const c=document.createElement("div");
-  c.className="card "+w.article;
-  c.innerHTML=`<img src="${w.img}"><span class="word">${w.word}</span><span class="meaning">${w.meaning}</span>
-  <button class="sound" onclick="new Audio('${w.audio}').play()">🔊</button>`;
-  wordContainer.appendChild(c);
-});
+if(wordContainer){ words.forEach(w=>{ const c=document.createElement("div"); c.className="card "+w.article; c.innerHTML=`<img src='${w.img}'><span class='word'>${w.word}</span><span class='meaning'>${w.meaning}</span><button class='sound' onclick="new Audio('${w.audio}').play()">🔊</button>`; wordContainer.appendChild(c); }); }
+
+// 20 Cümle Örnek
+const sentences = [
+  {text:"Ich heiße Derya.",audio:"audio/ich_heiße_derya.mp3"},
+  {text:"Ich komme aus der Türkei.",audio:"audio/ich_komme_aus.mp3"},
+  {text:"Wie geht es dir?",audio:"audio/wie_geht_es_dir.mp3"},
+  {text:"Guten Morgen!",audio:"audio/guten_morgen.mp3"}
+];
+const sentenceContainer=document.getElementById("sentenceCards");
+if(sentenceContainer){ sentences.forEach(s=>{ const c=document.createElement("div"); c.className="card noArticle"; c.innerHTML=`<span class='word'>${s.text}</span><button class='sound' onclick="new Audio('${s.audio}').play()">🔊</button>`; sentenceContainer.appendChild(c); }); }
 </script>
 </body>
 </html>
