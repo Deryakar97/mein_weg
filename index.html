@@ -40,7 +40,7 @@ body {
 .nav-links.open { display:flex; }
 
 /* Sekmeler */
-.tabcontent { display:none; padding:100px 20px 20px 20px; position:relative; z-index:10; }
+.tabcontent { display:none; padding:120px 20px 20px 20px; position:relative; z-index:10; }
 
 /* Ana Sayfa */
 .home-container {text-align:center; padding:120px 20px 50px 20px; position:relative;}
@@ -54,7 +54,7 @@ body {
 /* Su Kabarcıkları */
 .bubble-container {position:absolute; bottom:0; width:100%; height:300px; pointer-events:none; z-index:1; overflow:hidden;}
 .bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.5); border-radius:50%; animation-name:rise, swing; animation-timing-function:linear, ease-in-out; animation-iteration-count:1, infinite; opacity:0.7;}
-@keyframes rise { 0%{transform:translateY(0) scale(var(--scale)); opacity:1;} 100%{transform:translateY(-100vh) scale(var(--scale)); opacity:0;} }
+@keyframes rise { 0%{transform:translateY(0) scale(var(--scale)); opacity:1;} 100%{transform:translateY(-80vh) scale(var(--scale)); opacity:0;} }
 @keyframes swing {0%,100%{transform:translateX(0);}50%{transform:translateX(var(--x-move));}}
 
 /* Kartlar */
@@ -176,18 +176,18 @@ function openTabByName(tabName){
 }
 openTabByName('Home');
 
-// Kabarcıklar
+// Kabarcıklar (daha büyük ve hızlı)
 const bubblesContainer = document.getElementById("bubbles");
-for(let i=0;i<20;i++){
+for(let i=0;i<25;i++){
   const b = document.createElement("div");
   b.className="bubble";
-  const size = Math.random()*25+8;
+  const size = Math.random()*40 + 20; // 20-60px, daha büyük
   b.style.width = b.style.height = size+"px";
   b.style.left = Math.random()*100+"%";
-  b.style.setProperty('--scale', Math.random()*0.5+0.5);
-  b.style.setProperty('--x-move', (Math.random()*50-25)+'px');
-  b.style.animationDuration = (Math.random()*5+5)+"s";
-  b.style.animationDelay = Math.random()*5+"s";
+  b.style.setProperty('--scale', Math.random()*0.5 + 0.5);
+  b.style.setProperty('--x-move', (Math.random()*50 - 25)+'px');
+  b.style.animationDuration = (Math.random()*3 + 3)+"s"; // 3-6s, daha hızlı
+  b.style.animationDelay = Math.random()*3+"s";
   bubblesContainer.appendChild(b);
 }
 
