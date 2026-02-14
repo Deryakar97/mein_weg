@@ -5,21 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Derya'nın Almanca Sitesi</title>
 <style>
-/* ---------- Genel ---------- */
 body {
   margin:0;
   font-family:'Arial',sans-serif;
   color:#000;
-  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  background:#e0f7fa; /* göz dostu pastel arka plan */
   overflow-x:hidden;
   position:relative;
 }
 
-/* ---------- Üst Sekmeler ---------- */
-.tab {overflow:hidden; border-bottom:2px solid #ffcc00; margin-bottom:10px;}
+/* Sekmeler flex */
+.tab {
+  display:flex;
+  overflow-x:auto;
+  border-bottom:2px solid #ffcc00;
+  margin-bottom:10px;
+}
 .tab button {
-  background-color: rgba(0,0,0,0.3);
-  float:left;
+  flex:none;
+  background-color: rgba(0,0,0,0.2);
   border:none; outline:none;
   cursor:pointer;
   padding:12px 18px;
@@ -29,12 +33,13 @@ body {
 }
 .tab button:hover { background-color:#ff9900; }
 .tab button.active { background-color:#ffcc00; color:black; }
-.tabcontent { display:none; padding:20px 20px; }
+.tabcontent { display:none; padding:20px; }
 
-/* ---------- Alt Sekmeler ---------- */
-.subtab { overflow:hidden; margin-bottom:10px; }
+/* Alt sekmeler */
+.subtab { display:flex; overflow-x:auto; margin-bottom:10px; }
 .subtab button {
-  background-color: rgba(0,0,0,0.3);
+  flex:none;
+  background-color: rgba(0,0,0,0.2);
   border:none;
   outline:none;
   cursor:pointer;
@@ -49,7 +54,7 @@ body {
 .subtab button.active { background-color:#ffcc00; color:black; }
 .subtabcontent { display:none; padding-top:15px; }
 
-/* ---------- Ana Sayfa ---------- */
+/* Ana Sayfa */
 .home-container {text-align:center; padding:80px 20px; position:relative;}
 .typewriter {
   overflow:hidden;
@@ -58,9 +63,9 @@ body {
   margin:0 auto;
   letter-spacing:.05em;
   animation: typing 4s steps(30,end), blink-caret 0.75s step-end infinite;
-  font-size:32px;
+  font-size:28px;
   font-weight:bold;
-  color:#000;
+  max-width:90%;
 }
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;}50%{border-color:#ffcc00;} }
@@ -73,20 +78,20 @@ body {
 }
 .btn:hover { background-color:#ff9900; transform:scale(1.05); }
 
-/* ---------- Sabit Bayrak ---------- */
+/* Bayrak */
 .german-flag {
   position:absolute; top:20px; right:20px;
-  width:50px; height:auto; z-index:10;
+  width:100px; height:auto; z-index:10;
 }
 
-/* ---------- Su Kabarcıkları ---------- */
+/* Su kabarcıkları */
 .bubble-container {
   position:absolute; bottom:0; width:100%; height:300px;
   pointer-events:none; overflow:hidden;
 }
 .bubble {
   position:absolute; bottom:0; width:12px; height:12px;
-  background: rgba(255,255,255,0.7); border-radius:50%;
+  background: rgba(255,255,255,0.5); border-radius:50%;
   animation: rise 5s infinite ease-in;
 }
 .bubble1 { left:10%; animation-delay:0s; }
@@ -94,9 +99,9 @@ body {
 .bubble3 { left:40%; animation-delay:2s; }
 .bubble4 { left:60%; animation-delay:0.5s; }
 .bubble5 { left:80%; animation-delay:1.5s; }
-@keyframes rise { 0%{transform:translateY(0) scale(1); opacity:0.6;} 50%{transform:translateY(-150px) scale(1.5); opacity:1;} 100%{transform:translateY(-300px) scale(1); opacity:0;} }
+@keyframes rise { 0%{transform:translateY(0) scale(1); opacity:0.5;} 50%{transform:translateY(-150px) scale(1.5); opacity:0.7;} 100%{transform:translateY(-300px) scale(1); opacity:0;} }
 
-/* ---------- Kart Sistemi ---------- */
+/* Kart Sistemi */
 .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:20px; }
 .card {
   padding:18px; border-radius:12px; text-align:center; font-weight:bold;
@@ -115,16 +120,16 @@ body {
 .card button.sound {cursor:pointer; background:#ffcc00; border:none; border-radius:5px; padding:5px; margin-top:5px;}
 .card button.sound:hover {background:#ff9900;}
 
-/* ---------- Oyun Kartları ---------- */
+/* Oyun Kartları */
 .game-card {padding:15px; border-radius:10px; background:#ffcc00; margin:10px; cursor:pointer; text-align:center; transition:0.3s;}
 .game-card:hover {background:#ff9900; transform:scale(1.05);}
 
-/* ---------- İlerleme Bar ---------- */
+/* İlerleme Bar */
 .progress-bar {background:#ddd; border-radius:10px; overflow:hidden; margin:10px 0;}
-.progress-fill {background:#00bfff; height:20px; width:50%; color:white; text-align:center; line-height:20px;}
+.progress-fill {background:#00bfff; height:20px; width:40%; color:white; text-align:center; line-height:20px;}
 
-/* ---------- Responsive ---------- */
-@media (max-width:768px) { .card-grid {grid-template-columns:repeat(auto-fit,minmax(120px,1fr));} }
+/* Responsive */
+@media (max-width:768px) { .card-grid {grid-template-columns:repeat(auto-fit,minmax(120px,1fr));} .typewriter{font-size:22px;} }
 </style>
 </head>
 <body>
@@ -162,12 +167,8 @@ body {
 <!-- Hakkımda -->
 <div id="About" class="tabcontent">
   <h2>Hakkımda</h2>
-  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. 
-     Bu siteyi, öğrendiğim bilgileri paylaşmak ve Almanca öğrenmek isteyen herkese ilham vermek amacıyla oluşturdum.</p>
-  <p>Almanca öğrenmek, sadece yeni bir dil öğrenmek değil; farklı kültürleri tanımak, dünyayı daha iyi anlamak ve kendini geliştirmek demektir. 
-     Unutmayın: Hatalar yapmak öğrenmenin en değerli parçasıdır. Her yeni kelime, her yeni cümle sizi bir adım daha ileri taşır.</p>
-  <p>Bu sitede sizi bekleyen interaktif kartlar, sesli telaffuzlar ve eğlenceli aktivitelerle Almanca öğrenme yolculuğunuz daha keyifli olacak. 
-     Her gün biraz çalışın, düzenli pratik yapın ve pes etmeyin! <strong>Her başarı küçük bir adımla başlar!</strong> 🌟</p>
+  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi, öğrendiğim bilgileri paylaşmak ve Almanca öğrenmek isteyen herkese ilham vermek amacıyla oluşturdum.</p>
+  <p>Almanca öğrenmek, sadece yeni bir dil öğrenmek değil; farklı kültürleri tanımak, dünyayı daha iyi anlamak ve kendini geliştirmek demektir. Her gün biraz çalışın ve pes etmeyin!</p>
 </div>
 
 <!-- Öğrenme -->
@@ -210,7 +211,7 @@ body {
 <div id="Games" class="tabcontent">
   <h2>Oyunlar</h2>
   <div class="card-grid">
-    <div class="game-card" onclick="alert('Eşleştirme oyunu açılıyor!')">Hafıza Kartı Oyunu</div>
+    <div class="game-card" onclick="alert('Hafıza Kartı Oyunu açılıyor!')">Hafıza Kartı Oyunu</div>
     <div class="game-card" onclick="alert('Artikelleri seçme oyunu açılıyor!')">Artikelleri Seç</div>
     <div class="game-card" onclick="alert('Mini Quiz açılıyor!')">Mini Quiz</div>
   </div>
@@ -219,7 +220,6 @@ body {
 <!-- İlerleme -->
 <div id="Progress" class="tabcontent">
   <h2>İlerleme</h2>
-  <p>Örnek ilerleme:</p>
   <div class="progress-bar"><div class="progress-fill" style="width:40%;">40%</div></div>
 </div>
 
@@ -229,7 +229,7 @@ body {
   <ul>
     <li><a href="https://www.goethe.de" target="_blank">Goethe Institut</a></li>
     <li><a href="https://www.dw.com/deutsch-lernen/s-2055" target="_blank">DW Learn German</a></li>
-    <li>Almanca A1 Kitapları (Öneriler: Schritte, Menschen, Netzwerk)</li>
+    <li>Almanca A1 Kitapları (Schritte, Menschen, Netzwerk)</li>
   </ul>
 </div>
 
@@ -255,20 +255,19 @@ function openSubTab(evt, subTabName){
   document.getElementById(subTabName).style.display="block";
   evt.currentTarget.className+=" active";
 }
-
 // Default open
 document.getElementById("defaultOpen").click();
 document.getElementById("defaultSub").click();
 
-// Örnek kelimeler (ikonlu ve sesli)
+// Örnek kelimeler ve cümleler (çoğaltılabilir)
 const words = [
-  {word:"Mann",meaning:"Adam",article:"der",img:"https://img.icons8.com/ios-filled/50/000000/user.png",audio:"audio/mann.mp3"},
-  {word:"Frau",meaning:"Kadın",article:"die",img:"https://img.icons8.com/ios-filled/50/000000/woman.png",audio:"audio/frau.mp3"},
-  {word:"Haus",meaning:"Ev",article:"das",img:"https://img.icons8.com/ios-filled/50/000000/home.png",audio:"audio/haus.mp3"},
-  {word:"Tisch",meaning:"Masa",article:"noArticle",img:"https://img.icons8.com/ios-filled/50/000000/table.png",audio:"audio/tisch.mp3"},
-  {word:"Buch",meaning:"Kitap",article:"das",img:"https://img.icons8.com/ios-filled/50/000000/book.png",audio:"audio/buch.mp3"},
-  {word:"Apfel",meaning:"Elma",article:"der",img:"https://img.icons8.com/ios-filled/50/000000/apple.png",audio:"audio/apfel.mp3"},
-  {word:"Katze",meaning:"Kedi",article:"die",img:"https://img.icons8.com/ios-filled/50/000000/cat.png",audio:"audio/katze.mp3"}
+  {word:"Mann",meaning:"Adam",article:"der",img:"https://img.icons8.com/color/48/000000/user.png",audio:"audio/mann.mp3"},
+  {word:"Frau",meaning:"Kadın",article:"die",img:"https://img.icons8.com/color/48/000000/woman.png",audio:"audio/frau.mp3"},
+  {word:"Haus",meaning:"Ev",article:"das",img:"https://img.icons8.com/color/48/000000/home.png",audio:"audio/haus.mp3"},
+  {word:"Tisch",meaning:"Masa",article:"noArticle",img:"https://img.icons8.com/color/48/000000/table.png",audio:"audio/tisch.mp3"},
+  {word:"Buch",meaning:"Kitap",article:"das",img:"https://img.icons8.com/color/48/000000/book.png",audio:"audio/buch.mp3"},
+  {word:"Apfel",meaning:"Elma",article:"der",img:"https://img.icons8.com/color/48/000000/apple.png",audio:"audio/apfel.mp3"},
+  {word:"Katze",meaning:"Kedi",article:"die",img:"https://img.icons8.com/color/48/000000/cat.png",audio:"audio/katze.mp3"}
 ];
 const wordContainer=document.getElementById("wordCards");
 words.forEach(w=>{
@@ -278,8 +277,6 @@ words.forEach(w=>{
   <button class="sound" onclick="new Audio('${w.audio}').play()">🔊</button>`;
   wordContainer.appendChild(c);
 });
-
-// Örnek cümleler
 const sentences = [
   {sentence:"Ich heiße Derya.",meaning:"Benim adım Derya.",audio:"audio/ich.mp3"},
   {sentence:"Ich lerne Deutsch.",meaning:"Almanca öğreniyorum.",audio:"audio/lerne.mp3"},
