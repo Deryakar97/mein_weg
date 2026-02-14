@@ -8,7 +8,7 @@
 body {
   margin:0;
   font-family:'Arial',sans-serif;
-  background-color: #7FFFD4; /* Su yeşili arka plan */
+  background-color: #E0F7FA; /* Buz rengi arka plan */
   overflow-x:hidden;
   color:#000;
   position:relative;
@@ -176,18 +176,18 @@ function openTabByName(tabName){
 }
 openTabByName('Home');
 
-// Kabarcıklar (daha büyük ve hızlı)
+// Kabarcıklar (büyük ve hızlı)
 const bubblesContainer = document.getElementById("bubbles");
 for(let i=0;i<25;i++){
   const b = document.createElement("div");
   b.className="bubble";
-  const size = Math.random()*40 + 20; // 20-60px, daha büyük
+  const size = Math.random()*50 + 30; // 30-80px, büyük
   b.style.width = b.style.height = size+"px";
   b.style.left = Math.random()*100+"%";
   b.style.setProperty('--scale', Math.random()*0.5 + 0.5);
   b.style.setProperty('--x-move', (Math.random()*50 - 25)+'px');
-  b.style.animationDuration = (Math.random()*3 + 3)+"s"; // 3-6s, daha hızlı
-  b.style.animationDelay = Math.random()*3+"s";
+  b.style.animationDuration = (Math.random()*2 + 2)+"s"; // 2-4s, hızlı
+  b.style.animationDelay = Math.random()*2+"s";
   bubblesContainer.appendChild(b);
 }
 
