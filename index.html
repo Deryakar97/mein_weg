@@ -8,11 +8,10 @@
 body {
   margin:0;
   font-family:'Arial',sans-serif;
-  background: linear-gradient(to bottom, #1f9f8b, #1f4f8b);
+  background-color: #7FFFD4; /* Su yeşili arka plan */
   overflow-x:hidden;
   color:#000;
   position:relative;
-  transition: background 2s ease;
 }
 
 /* Menü ve Logo */
@@ -24,66 +23,65 @@ body {
   align-items:center;
   position:fixed;
   top:0; left:0; width:100%;
-  z-index:100;
+  z-index:300;
   box-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
 .menu-bar h1 {
   font-family:'Verdana',sans-serif;
   font-size:32px;
   margin:0;
-  background: linear-gradient(45deg, #00fff0, #0077ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  color:white;
 }
 .hamburger {cursor:pointer; width:30px; height:22px; position:relative;}
 .hamburger div {background:white; height:4px; margin:4px 0; border-radius:2px; transition:0.3s;}
-.nav-links {display:none; flex-direction:column; background:#00bfff; position:absolute; top:50px; left:0; width:100%;}
+.nav-links {display:none; flex-direction:column; background:#00bfff; position:absolute; top:50px; left:0; width:100%; z-index:200;}
 .nav-links button {background:none; border:none; color:white; padding:12px; font-size:16px; text-align:left; cursor:pointer;}
 .nav-links button:hover {background:#0099cc;}
+.nav-links.open { display:flex; }
+
+/* Sekmeler */
+.tabcontent { display:none; padding:100px 20px 20px 20px; position:relative; z-index:10; }
 
 /* Ana Sayfa */
 .home-container {text-align:center; padding:120px 20px 50px 20px; position:relative;}
-.typewriter {overflow:hidden; border-right:.15em solid #ffcc00; white-space:nowrap; margin:0 auto; letter-spacing:.05em; animation: typing 4s steps(30,end), blink-caret 0.75s step-end infinite; font-size:32px; font-weight:bold; max-width:90%; color:white;}
+.typewriter {overflow:hidden; border-right:.15em solid #ffcc00; white-space:nowrap; margin:0 auto; letter-spacing:.05em; animation: typing 4s steps(30,end), blink-caret 0.75s step-end infinite; font-size:32px; font-weight:bold; max-width:90%; color:#004d40;}
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;}50%{border-color:#ffcc00;} }
-.subtext { font-size:18px; margin:15px 0; color:#fff; font-weight:bold; }
+.subtext { font-size:18px; margin:15px 0; color:#004d40; font-weight:bold; }
 .btn { background-color:#ffcc00; border:none; padding:12px 25px; font-size:16px; border-radius:10px; cursor:pointer; transition: transform 0.3s, background-color 0.3s; margin:5px;}
 .btn:hover { background-color:#ff9900; transform:scale(1.05); }
 
 /* Su Kabarcıkları */
-.bubble-container {position:absolute; bottom:0; width:100%; height:300px; pointer-events:none; overflow:hidden;}
-.bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.5); border-radius:50%; animation: rise linear infinite, swing ease-in-out infinite; opacity:0.7;}
-@keyframes rise { 0%{transform:translateY(0);} 100%{transform:translateY(-300px); opacity:0;} }
-@keyframes swing {0%,100%{transform:translateX(0);}50%{transform:translateX(15px);}}
+.bubble-container {position:absolute; bottom:0; width:100%; height:300px; pointer-events:none; z-index:1; overflow:hidden;}
+.bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.5); border-radius:50%; animation-name:rise, swing; animation-timing-function:linear, ease-in-out; animation-iteration-count:1, infinite; opacity:0.7;}
+@keyframes rise { 0%{transform:translateY(0) scale(var(--scale)); opacity:1;} 100%{transform:translateY(-100vh) scale(var(--scale)); opacity:0;} }
+@keyframes swing {0%,100%{transform:translateX(0);}50%{transform:translateX(var(--x-move));}}
 
+/* Kartlar */
 .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:20px; }
 .card { padding:18px; border-radius:12px; text-align:center; font-weight:bold; cursor:pointer; transition: transform 0.2s, box-shadow 0.3s; color:white; position:relative;}
 .card:hover {transform:scale(1.05); box-shadow:0 0 15px rgba(0,0,0,0.3);}
-.card.der {background:#2196f3; color:#000;}
-.card.die {background:#ff69b4; color:#fff;}
-.card.das {background:#ffd700; color:#000;}
-.card.noArticle {background: #888888; color:white;}
-.card .word {display:block; font-size:20px; margin-bottom:5px;}
-.card .meaning {display:block; font-size:16px; opacity:0.9;}
-.card img {width:50px; height:50px; margin-bottom:5px;}
-.card button.sound {cursor:pointer; background:#ffcc00; border:none; border-radius:5px; padding:5px; margin-top:5px;}
-.card button.sound:hover {background:#ff9900;}
+.card.der{background:#2196f3; color:#000;}
+.card.die{background:#ff69b4; color:#fff;}
+.card.das{background:#ffd700; color:#000;}
+.card.noArticle{background: #888888; color:white;}
+.card .word{display:block; font-size:20px; margin-bottom:5px;}
+.card .meaning{display:block; font-size:16px; opacity:0.9;}
+.card button.sound{cursor:pointer; background:#ffcc00; border:none; border-radius:5px; padding:5px; margin-top:5px;}
+.card button.sound:hover{background:#ff9900;}
 
 .game-card {padding:15px; border-radius:10px; background:#ffcc00; margin:10px; cursor:pointer; text-align:center; transition:0.3s;}
 .game-card:hover {background:#ff9900; transform:scale(1.05);}
 
-.progress-bar {background:#ddd; border-radius:10px; overflow:hidden; margin:10px 0;}
-.progress-fill {background:#00bfff; height:20px; width:40%; color:white; text-align:center; line-height:20px;}
-
 @media (max-width:768px) { .card-grid {grid-template-columns:repeat(auto-fit,minmax(120px,1fr));} .typewriter{font-size:24px;} }
+
 </style>
 </head>
 <body>
 
 <!-- Menü -->
 <div class="menu-bar">
-  <h1>DK</h1>
+  <h1>Derya's Deutsch</h1>
   <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <div class="nav-links" id="navLinks">
     <button onclick="openTabByName('Home')">Anasayfa</button>
@@ -99,7 +97,7 @@ body {
   </div>
 </div>
 
-<!-- Ana Sayfa -->
+<!-- Sekmeler -->
 <div id="Home" class="tabcontent">
   <div class="home-container">
     <h1 class="typewriter">Merhaba! Ben Derya</h1>
@@ -112,44 +110,36 @@ body {
   <div class="bubble-container" id="bubbles"></div>
 </div>
 
-<!-- Hakkımda -->
 <div id="About" class="tabcontent">
   <h2>Hakkımda</h2>
-  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi öğrendiğim bilgileri paylaşmak için oluşturdum.</p>
-  <p>Almanca öğrenmek, sadece bir dil değil; farklı kültürleri tanımak ve kendini geliştirmek demektir. Her gün çalışın, pes etmeyin!</p>
+  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum.</p>
 </div>
 
-<!-- Öğrenme -->
 <div id="Learn" class="tabcontent">
   <h2>A1 Kelimeler</h2>
   <div class="card-grid" id="wordCards"></div>
 </div>
 
-<!-- Cümleler -->
 <div id="Sentences" class="tabcontent">
   <h2>A1 Cümleler</h2>
   <div class="card-grid" id="sentenceCards"></div>
 </div>
 
-<!-- Quiz -->
 <div id="Quiz" class="tabcontent">
   <h2>Quiz</h2>
   <div id="quizArea"></div>
 </div>
 
-<!-- Flashcards -->
 <div id="Flashcards" class="tabcontent">
   <h2>Hafıza Kartları</h2>
   <p>Kartları çevirerek öğrenin! Sesli destek var.</p>
 </div>
 
-<!-- Favoriler -->
 <div id="Favorites" class="tabcontent">
   <h2>Favoriler</h2>
   <p>Favori kelimeleriniz ve cümleleriniz burada.</p>
 </div>
 
-<!-- Oyunlar -->
 <div id="Games" class="tabcontent">
   <h2>Oyunlar</h2>
   <div class="game-card" onclick="alert('Hafıza Kartı Oyunu açılıyor!')">Hafıza Kartı Oyunu</div>
@@ -157,13 +147,11 @@ body {
   <div class="game-card" onclick="alert('Mini Quiz açılıyor!')">Mini Quiz</div>
 </div>
 
-<!-- İlerleme -->
 <div id="Progress" class="tabcontent">
   <h2>İlerleme</h2>
   <div class="progress-bar"><div class="progress-fill" style="width:40%;">40%</div></div>
 </div>
 
-<!-- Kaynaklar -->
 <div id="Resources" class="tabcontent">
   <h2>Kaynaklar</h2>
   <ul>
@@ -175,8 +163,10 @@ body {
 </div>
 
 <script>
-// Hamburger
-function toggleMenu(){ const nav = document.getElementById('navLinks'); nav.style.display = (nav.style.display==='flex')?'none':'flex'; }
+// Menü toggle
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
 
 // Sekmeler
 function openTabByName(tabName){ 
@@ -186,26 +176,27 @@ function openTabByName(tabName){
 }
 openTabByName('Home');
 
-// Su kabarcıkları rastgele
+// Kabarcıklar
 const bubblesContainer = document.getElementById("bubbles");
 for(let i=0;i<20;i++){
   const b = document.createElement("div");
   b.className="bubble";
-  const size = Math.random()*25+8; // 8-33px
+  const size = Math.random()*25+8;
   b.style.width = b.style.height = size+"px";
   b.style.left = Math.random()*100+"%";
+  b.style.setProperty('--scale', Math.random()*0.5+0.5);
+  b.style.setProperty('--x-move', (Math.random()*50-25)+'px');
   b.style.animationDuration = (Math.random()*5+5)+"s";
   b.style.animationDelay = Math.random()*5+"s";
   bubblesContainer.appendChild(b);
 }
 
-// A1 Kelimeler
+// Kelimeler
 const words = [
   {word:"Mann",meaning:"Adam",article:"der",audio:"audio/mann.mp3"},
   {word:"Frau",meaning:"Kadın",article:"die",audio:"audio/frau.mp3"},
   {word:"Haus",meaning:"Ev",article:"das",audio:"audio/haus.mp3"},
   {word:"Tisch",meaning:"Masa",article:"noArticle",audio:"audio/tisch.mp3"}
-  // ... Toplam 50 kelimeyi buraya ekle
 ];
 const wordContainer = document.getElementById("wordCards");
 words.forEach(w=>{
@@ -220,7 +211,6 @@ words.forEach(w=>{
 const sentences = [
   {sentence:"Ich heiße Derya.",meaning:"Benim adım Derya.",audio:"audio/ich_heiße_derya.mp3"},
   {sentence:"Ich lerne Deutsch.",meaning:"Almanca öğreniyorum.",audio:"audio/ich_lerne_deutsch.mp3"}
-  // ... Toplam 20 cümleyi buraya ekle
 ];
 const sentenceContainer = document.getElementById("sentenceCards");
 sentences.forEach(s=>{
@@ -230,24 +220,6 @@ sentences.forEach(s=>{
   <button class='sound' onclick="new Audio('${s.audio}').play()">🔊</button>`;
   sentenceContainer.appendChild(c);
 });
-
-// Quiz Örnek
-const quizArea = document.getElementById("quizArea");
-const quizQ = {q:"Mann kelimesi ne demek?", options:["Adam","Ev","Kadın","Masa"],answer:0,audio:["audio/mann.mp3","audio/haus.mp3","audio/frau.mp3","audio/tisch.mp3"]};
-const qDiv = document.createElement("div");
-qDiv.innerHTML=`<p>${quizQ.q}</p>`;
-quizQ.options.forEach((opt,i)=>{
-  const btn = document.createElement("button");
-  btn.className="game-card";
-  btn.textContent=opt;
-  btn.onclick = ()=>{
-    new Audio(quizQ.audio[i]).play();
-    if(i===quizQ.answer) alert("Doğru!");
-    else alert("Yanlış!");
-  };
-  qDiv.appendChild(btn);
-});
-quizArea.appendChild(qDiv);
 </script>
 </body>
 </html>
