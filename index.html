@@ -8,14 +8,14 @@
 body {
   margin:0;
   font-family:'Arial',sans-serif;
-  background:linear-gradient(180deg,#1fbbd1,#1f4f8b);
+  background: linear-gradient(to bottom, #1f9f8b, #1f4f8b);
   overflow-x:hidden;
   color:#000;
-  transition:background 2s ease;
   position:relative;
+  transition: background 2s ease;
 }
 
-/* Menü Çubuğu */
+/* Menü ve Logo */
 .menu-bar {
   background:#00bfff;
   padding:10px 20px;
@@ -25,8 +25,17 @@ body {
   position:fixed;
   top:0; left:0; width:100%;
   z-index:100;
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
-.menu-bar h1 {color:white; font-size:28px; margin:0; font-weight:bold;}
+.menu-bar h1 {
+  font-family:'Verdana',sans-serif;
+  font-size:32px;
+  margin:0;
+  background: linear-gradient(45deg, #00fff0, #0077ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
 .hamburger {cursor:pointer; width:30px; height:22px; position:relative;}
 .hamburger div {background:white; height:4px; margin:4px 0; border-radius:2px; transition:0.3s;}
 .nav-links {display:none; flex-direction:column; background:#00bfff; position:absolute; top:50px; left:0; width:100%;}
@@ -42,18 +51,12 @@ body {
 .btn { background-color:#ffcc00; border:none; padding:12px 25px; font-size:16px; border-radius:10px; cursor:pointer; transition: transform 0.3s, background-color 0.3s; margin:5px;}
 .btn:hover { background-color:#ff9900; transform:scale(1.05); }
 
-/* Su Kabarcıkları + Dalga */
+/* Su Kabarcıkları */
 .bubble-container {position:absolute; bottom:0; width:100%; height:300px; pointer-events:none; overflow:hidden;}
-.bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.4); border-radius:50%; animation: rise linear infinite, swing ease-in-out infinite;}
-.bubble1 { width:12px; height:12px; left:10%; animation-duration:6s; animation-delay:0s;}
-.bubble2 { width:20px; height:20px; left:25%; animation-duration:8s; animation-delay:1s;}
-.bubble3 { width:15px; height:15px; left:40%; animation-duration:5s; animation-delay:2s;}
-.bubble4 { width:25px; height:25px; left:60%; animation-duration:7s; animation-delay:0.5s;}
-.bubble5 { width:18px; height:18px; left:80%; animation-duration:9s; animation-delay:1.5s;}
-@keyframes rise { 0%{transform:translateY(0); opacity:0.5;}50%{opacity:0.7;}100%{transform:translateY(-300px); opacity:0;} }
+.bubble {position:absolute; bottom:0; background: rgba(255,255,255,0.5); border-radius:50%; animation: rise linear infinite, swing ease-in-out infinite; opacity:0.7;}
+@keyframes rise { 0%{transform:translateY(0);} 100%{transform:translateY(-300px); opacity:0;} }
 @keyframes swing {0%,100%{transform:translateX(0);}50%{transform:translateX(15px);}}
 
-/* Kartlar */
 .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:20px; }
 .card { padding:18px; border-radius:12px; text-align:center; font-weight:bold; cursor:pointer; transition: transform 0.2s, box-shadow 0.3s; color:white; position:relative;}
 .card:hover {transform:scale(1.05); box-shadow:0 0 15px rgba(0,0,0,0.3);}
@@ -67,11 +70,9 @@ body {
 .card button.sound {cursor:pointer; background:#ffcc00; border:none; border-radius:5px; padding:5px; margin-top:5px;}
 .card button.sound:hover {background:#ff9900;}
 
-/* Oyun Kartları */
 .game-card {padding:15px; border-radius:10px; background:#ffcc00; margin:10px; cursor:pointer; text-align:center; transition:0.3s;}
 .game-card:hover {background:#ff9900; transform:scale(1.05);}
 
-/* İlerleme Bar */
 .progress-bar {background:#ddd; border-radius:10px; overflow:hidden; margin:10px 0;}
 .progress-fill {background:#00bfff; height:20px; width:40%; color:white; text-align:center; line-height:20px;}
 
@@ -88,6 +89,7 @@ body {
     <button onclick="openTabByName('Home')">Anasayfa</button>
     <button onclick="openTabByName('About')">Hakkımda</button>
     <button onclick="openTabByName('Learn')">Öğrenme</button>
+    <button onclick="openTabByName('Sentences')">Cümleler</button>
     <button onclick="openTabByName('Quiz')">Quiz</button>
     <button onclick="openTabByName('Flashcards')">Hafıza Kartları</button>
     <button onclick="openTabByName('Favorites')">Favoriler</button>
@@ -101,66 +103,58 @@ body {
 <div id="Home" class="tabcontent">
   <div class="home-container">
     <h1 class="typewriter">Merhaba! Ben Derya</h1>
-    <p class="subtext">Almanca öğrenme yolculuğunuz burada başlıyor! 🌍</p>
+    <p class="subtext">Almanca öğrenme yolculuğunuz burada başlıyor! Her gün biraz çalışın, pes etmeyin ve farklı kültürleri keşfedin!</p>
     <div>
       <button class="btn" onclick="openTabByName('Learn')">Öğrenmeye Başla</button>
       <button class="btn" onclick="openTabByName('Games')">Oyunları Deneyin</button>
     </div>
   </div>
-  <div class="bubble-container">
-    <div class="bubble bubble1"></div>
-    <div class="bubble bubble2"></div>
-    <div class="bubble bubble3"></div>
-    <div class="bubble bubble4"></div>
-    <div class="bubble bubble5"></div>
-  </div>
+  <div class="bubble-container" id="bubbles"></div>
 </div>
 
 <!-- Hakkımda -->
 <div id="About" class="tabcontent">
   <h2>Hakkımda</h2>
-  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi, öğrendiğim bilgileri paylaşmak ve Almanca öğrenmek isteyen herkese ilham vermek için oluşturdum.</p>
-  <p>Almanca öğrenmek, sadece dil değil; farklı kültürleri keşfetmek, dünyayı daha iyi anlamak ve ufkunuzu genişletmek demektir. Her gün biraz çalışın ve pes etmeyin! 🌏</p>
+  <p>Merhaba! Ben Derya. Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim ve Almanca öğreniyorum. Bu siteyi öğrendiğim bilgileri paylaşmak için oluşturdum.</p>
+  <p>Almanca öğrenmek, sadece bir dil değil; farklı kültürleri tanımak ve kendini geliştirmek demektir. Her gün çalışın, pes etmeyin!</p>
 </div>
 
 <!-- Öğrenme -->
 <div id="Learn" class="tabcontent">
-  <h2>Öğrenme</h2>
+  <h2>A1 Kelimeler</h2>
   <div class="card-grid" id="wordCards"></div>
-  <h2>Cümleler</h2>
+</div>
+
+<!-- Cümleler -->
+<div id="Sentences" class="tabcontent">
+  <h2>A1 Cümleler</h2>
   <div class="card-grid" id="sentenceCards"></div>
 </div>
 
 <!-- Quiz -->
 <div id="Quiz" class="tabcontent">
   <h2>Quiz</h2>
-  <p>Soru örneği: “Mann” kelimesinin anlamı nedir?</p>
-  <button class="game-card" onclick="alert('Doğru!')">Adam</button>
-  <button class="game-card" onclick="alert('Yanlış!')">Ev</button>
-  <button class="game-card" onclick="alert('Yanlış!')">Kadın</button>
-  <button class="game-card" onclick="alert('Yanlış!')">Masa</button>
+  <div id="quizArea"></div>
 </div>
 
 <!-- Flashcards -->
 <div id="Flashcards" class="tabcontent">
   <h2>Hafıza Kartları</h2>
-  <p>Kartları çevirerek öğrenin! Sesli telaffuz destekli.</p>
+  <p>Kartları çevirerek öğrenin! Sesli destek var.</p>
 </div>
 
 <!-- Favoriler -->
 <div id="Favorites" class="tabcontent">
   <h2>Favoriler</h2>
-  <p>Favori kelimelerinizi burada görebilirsiniz.</p>
+  <p>Favori kelimeleriniz ve cümleleriniz burada.</p>
 </div>
 
 <!-- Oyunlar -->
 <div id="Games" class="tabcontent">
   <h2>Oyunlar</h2>
-  <div class="card-grid">
-    <div class="game-card" onclick="alert('Hafıza Kartı Oyunu açılıyor!')">Hafıza Kartı Oyunu</div>
-    <div class="game-card" onclick="alert('Artikelleri seçme oyunu açılıyor!')">Artikelleri Seç</div>
-    <div class="game-card" onclick="alert('Mini Quiz açılıyor!')">Mini Quiz</div>
-  </div>
+  <div class="game-card" onclick="alert('Hafıza Kartı Oyunu açılıyor!')">Hafıza Kartı Oyunu</div>
+  <div class="game-card" onclick="alert('Artikelleri Seçme Oyunu açılıyor!')">Artikelleri Seç</div>
+  <div class="game-card" onclick="alert('Mini Quiz açılıyor!')">Mini Quiz</div>
 </div>
 
 <!-- İlerleme -->
@@ -175,37 +169,85 @@ body {
   <ul>
     <li><a href="https://www.goethe.de" target="_blank">Goethe Institut</a></li>
     <li><a href="https://www.dw.com/deutsch-lernen/s-2055" target="_blank">DW Learn German</a></li>
-    <li><a href="https://www.duolingo.com/course/de/tr/Learn-German" target="_blank">Duolingo</a></li>
-    <li><a href="https://www.youtube.com/@begibegi" target="_blank">BegiBegi YouTube</a></li>
-    <li>Almanca A1 Kitapları (Schritte, Menschen, Netzwerk)</li>
+    <li><a href="https://www.duolingo.com" target="_blank">Duolingo</a></li>
+    <li><a href="https://www.youtube.com/@BegiBegi" target="_blank">BegiBegi YouTube</a></li>
   </ul>
 </div>
 
 <script>
-// Menü
-function toggleMenu() { const nav = document.getElementById('navLinks'); nav.style.display = (nav.style.display==='flex')?'none':'flex'; }
-function openTabByName(tabName){ let tab=document.getElementsByClassName("tabcontent"); for(let i=0;i<tab.length;i++) tab[i].style.display="none"; document.getElementById(tabName).style.display="block"; }
+// Hamburger
+function toggleMenu(){ const nav = document.getElementById('navLinks'); nav.style.display = (nav.style.display==='flex')?'none':'flex'; }
+
+// Sekmeler
+function openTabByName(tabName){ 
+  let tabcontent=document.getElementsByClassName("tabcontent");
+  for(let i=0;i<tabcontent.length;i++) tabcontent[i].style.display="none";
+  document.getElementById(tabName).style.display="block";
+}
 openTabByName('Home');
 
-// 50 Kelime Örnek (audio/mp3 dosyalarını kendi sunucuna koy)
-const words = [
-  {word:"Mann",meaning:"Adam",article:"der",img:"https://img.icons8.com/color/48/000000/user.png",audio:"audio/mann.mp3"},
-  {word:"Frau",meaning:"Kadın",article:"die",img:"https://img.icons8.com/color/48/000000/woman.png",audio:"audio/frau.mp3"},
-  {word:"Haus",meaning:"Ev",article:"das",img:"https://img.icons8.com/color/48/000000/home.png",audio:"audio/haus.mp3"},
-  {word:"Tisch",meaning:"Masa",article:"noArticle",img:"https://img.icons8.com/color/48/000000/table.png",audio:"audio/tisch.mp3"}
-];
-const wordContainer=document.getElementById("wordCards");
-if(wordContainer){ words.forEach(w=>{ const c=document.createElement("div"); c.className="card "+w.article; c.innerHTML=`<img src='${w.img}'><span class='word'>${w.word}</span><span class='meaning'>${w.meaning}</span><button class='sound' onclick="new Audio('${w.audio}').play()">🔊</button>`; wordContainer.appendChild(c); }); }
+// Su kabarcıkları rastgele
+const bubblesContainer = document.getElementById("bubbles");
+for(let i=0;i<20;i++){
+  const b = document.createElement("div");
+  b.className="bubble";
+  const size = Math.random()*25+8; // 8-33px
+  b.style.width = b.style.height = size+"px";
+  b.style.left = Math.random()*100+"%";
+  b.style.animationDuration = (Math.random()*5+5)+"s";
+  b.style.animationDelay = Math.random()*5+"s";
+  bubblesContainer.appendChild(b);
+}
 
-// 20 Cümle Örnek
-const sentences = [
-  {text:"Ich heiße Derya.",audio:"audio/ich_heiße_derya.mp3"},
-  {text:"Ich komme aus der Türkei.",audio:"audio/ich_komme_aus.mp3"},
-  {text:"Wie geht es dir?",audio:"audio/wie_geht_es_dir.mp3"},
-  {text:"Guten Morgen!",audio:"audio/guten_morgen.mp3"}
+// A1 Kelimeler
+const words = [
+  {word:"Mann",meaning:"Adam",article:"der",audio:"audio/mann.mp3"},
+  {word:"Frau",meaning:"Kadın",article:"die",audio:"audio/frau.mp3"},
+  {word:"Haus",meaning:"Ev",article:"das",audio:"audio/haus.mp3"},
+  {word:"Tisch",meaning:"Masa",article:"noArticle",audio:"audio/tisch.mp3"}
+  // ... Toplam 50 kelimeyi buraya ekle
 ];
-const sentenceContainer=document.getElementById("sentenceCards");
-if(sentenceContainer){ sentences.forEach(s=>{ const c=document.createElement("div"); c.className="card noArticle"; c.innerHTML=`<span class='word'>${s.text}</span><button class='sound' onclick="new Audio('${s.audio}').play()">🔊</button>`; sentenceContainer.appendChild(c); }); }
+const wordContainer = document.getElementById("wordCards");
+words.forEach(w=>{
+  const c = document.createElement("div");
+  c.className = "card "+w.article;
+  c.innerHTML = `<span class='word'>${w.word}</span><span class='meaning'>${w.meaning}</span>
+  <button class='sound' onclick="new Audio('${w.audio}').play()">🔊</button>`;
+  wordContainer.appendChild(c);
+});
+
+// Cümleler
+const sentences = [
+  {sentence:"Ich heiße Derya.",meaning:"Benim adım Derya.",audio:"audio/ich_heiße_derya.mp3"},
+  {sentence:"Ich lerne Deutsch.",meaning:"Almanca öğreniyorum.",audio:"audio/ich_lerne_deutsch.mp3"}
+  // ... Toplam 20 cümleyi buraya ekle
+];
+const sentenceContainer = document.getElementById("sentenceCards");
+sentences.forEach(s=>{
+  const c = document.createElement("div");
+  c.className="card der";
+  c.innerHTML = `<span class='word'>${s.sentence}</span><span class='meaning'>${s.meaning}</span>
+  <button class='sound' onclick="new Audio('${s.audio}').play()">🔊</button>`;
+  sentenceContainer.appendChild(c);
+});
+
+// Quiz Örnek
+const quizArea = document.getElementById("quizArea");
+const quizQ = {q:"Mann kelimesi ne demek?", options:["Adam","Ev","Kadın","Masa"],answer:0,audio:["audio/mann.mp3","audio/haus.mp3","audio/frau.mp3","audio/tisch.mp3"]};
+const qDiv = document.createElement("div");
+qDiv.innerHTML=`<p>${quizQ.q}</p>`;
+quizQ.options.forEach((opt,i)=>{
+  const btn = document.createElement("button");
+  btn.className="game-card";
+  btn.textContent=opt;
+  btn.onclick = ()=>{
+    new Audio(quizQ.audio[i]).play();
+    if(i===quizQ.answer) alert("Doğru!");
+    else alert("Yanlış!");
+  };
+  qDiv.appendChild(btn);
+});
+quizArea.appendChild(qDiv);
 </script>
 </body>
 </html>
