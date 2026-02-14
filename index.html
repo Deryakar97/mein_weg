@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derya'nın Dil Öğrenme Sitesi</title>
+<style>
+/* ---------- Genel Ayarlar ---------- */
+body {margin:0; font-family:Arial,sans-serif; color:white; background: linear-gradient(270deg, #222, #444, #222, #555); background-size: 800% 800%; animation: gradientBG 15s ease infinite;}
+@keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}/* ---------- Üst Sekmeler ---------- */ .tab {overflow:hidden; border-bottom:2px solid #ffcc00; margin-bottom:20px;} .tab button {background-color: rgba(0,0,0,0.4); float:left; border:none; outline:none; cursor:pointer; padding:14px 20px; transition:0.3s; font-size:18px; color:white;} .tab button:hover {background-color:#ff6600;} .tab button.active {background-color:#ffcc00; color:black;} .tabcontent {display:none; padding:20px 20px;}
+
+/* ---------- Alt Sekmeler ---------- */ .subtab {overflow:hidden; margin-bottom:15px;} .subtab button {background-color: rgba(0,0,0,0.3); border:none; outline:none; cursor:pointer; padding:10px 15px; margin-right:5px; font-size:16px; transition:0.3s; color:white; border-radius:5px;} .subtab button:hover {background-color:#ff9900;} .subtab button.active {background-color:#ffcc00; color:black;} .subtabcontent {display:none; padding-top:15px;}
+
+/* ---------- Anasayfa ---------- */ .home-container {text-align:center; padding:50px 20px;} .typewriter {overflow:hidden; border-right:.15em solid #ffcc00; white-space:nowrap; margin:0 auto; letter-spacing:.05em; animation: typing 3s steps(30,end), blink-caret 0.75s step-end infinite;} @keyframes typing {from{width:0;} to{width:100%;}} @keyframes blink-caret {from,to{border-color:transparent;}50%{border-color:#ffcc00;}} .subtext {font-size:18px; margin:20px 0; color:#ddd;} .btn {background-color:#ffcc00; border:none; padding:12px 25px; font-size:18px; border-radius:10px; cursor:pointer; transition: transform 0.3s, background-color 0.3s;} .btn:hover {background-color:#ff9900; transform:scale(1.1);}
+
+/* ---------- Su Dalgaları ---------- */ .wave-container {position:relative; width:100%; height:150px; overflow:hidden; line-height:0; margin-top:30px;} .wave {position:relative; width:200%; height:100%; background: rgba(255,204,0,0.3); border-radius:43%; animation: waveMove 6s linear infinite;} @keyframes waveMove {0%{transform:translateX(0);}100%{transform:translateX(-50%);}} .drop {position:absolute; bottom:50px; width:12px; height:12px; background: rgba(255, 204, 0, 0.5); border-radius:50%; animation: dropMove 3s ease-in-out infinite;} .drop1 {left:10%; animation-delay:0s;} .drop2 {left:25%; animation-delay:0.5s;} .drop3 {left:40%; animation-delay:1s;} .drop4 {left:60%; animation-delay:1.5s;} .drop5 {left:80%; animation-delay:2s;} @keyframes dropMove {0%{transform:translateY(0) scale(1);opacity:0.6;}50%{transform:translateY(-15px) scale(1.2);opacity:1;}100%{transform:translateY(0) scale(1);opacity:0.6;}}
+
+/* ---------- Kart Sistemi ---------- */ .card-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; margin-top:20px;} .card {padding:18px; border-radius:12px; text-align:center; font-weight:bold; cursor:default; transition: transform 0.2s, background 0.3s;} .card:hover {transform:scale(1.05); filter:brightness(1.15);} .card.der {background:#3a6ea5; color:white;} .card.die {background:#d16ca3; color:white;} .card.das {background:#e6b800; color:black;} .card.noArticle {background: rgba(255,255,255,0.2); color:black;} .card .word {display:block; font-size:20px; margin-bottom:8px;} .card .meaning {display:block; font-size:16px; opacity:0.9;} .card .sound {cursor:pointer; margin-left:5px;} .card .favorite {cursor:pointer; float:right;} </style>
+
+</head>
+<body><!-- Üst Sekmeler --><div class="tab">
+  <button class="tablinks" onclick="openTab(event,'Home')" id="defaultOpen">Anasayfa</button>
+  <button class="tablinks" onclick="openTab(event,'About')">Hakkımda</button>
+  <button class="tablinks" onclick="openTab(event,'Learn')">Öğrenme</button>
+</div><!-- Anasayfa --><div id="Home" class="tabcontent">
+  <div class="home-container">
+    <h1 class="typewriter">Merhaba! Ben Derya 👋</h1>
+    <p class="subtext">Bu site, Almanca öğrenme yolculuğumu paylaştığım kişisel web sitemdir.</p>
+    <button class="btn" onclick="openSubTabById('A1Words')">Öğrenmeye Başla</button>
+  </div>
+  <div class="wave-container">
+    <div class="wave"></div>
+    <div class="drop drop1"></div>
+    <div class="drop drop2"></div>
+    <div class="drop drop3"></div>
+    <div class="drop drop4"></div>
+    <div class="drop drop5"></div>
+  </div>
+</div><!-- Hakkımda --><div id="About" class="tabcontent">
+  <h2>Hakkımda</h2>
+  <p>Bilgisayar ve Öğretim Teknolojileri Öğretmeniyim. Almanca öğreniyorum ve öğrendiğim bilgileri bu sitede paylaşıyorum.</p>
+</div><!-- Öğrenme --><div id="Learn" class="tabcontent">
+  <div class="subtab">
+    <button class="subtablinks" onclick="openSubTab(event,'A1Words')" id="defaultSub">A1 Kelimeler</button>
+    <button class="subtablinks" onclick="openSubTab(event,'A1Sentences')">A1 Cümleler</button>
+    <button class="subtablinks" onclick="openSubTab(event,'Quiz')">Quiz</button>
+  </div>  <!-- A1 Kelimeler -->  <div id="A1Words" class="subtabcontent">
+    <div class="card-grid">
+      <div class="card der"><span class="word">der Mann</span><span class="meaning">Adam</span><span class="sound">🔊</span><span class="favorite">⭐</span></div>
+      <div class="card der"><span class="word">der Tisch</span><span class="meaning">Masa</span><span class="sound">🔊</span><span class="favorite">⭐</span></div>
+      <div class="card die"><span class="word">die Frau</span><span class="meaning">Kadın</span><span class="sound">🔊</span><span class="favorite">⭐</span></div>
+      <div class="card das"><span class="word">das Haus</span><span class="meaning">Ev</span><span class="sound">🔊</span><span class="favorite">⭐</span></div>
+      <div class="card noArticle"><span class="word">ich</span><span class="meaning">Ben</span><span class="sound">🔊</span><span class="favorite">⭐</span></div>
+    </div>
+  </div>  <!-- A1 Cümleler -->  <div id="A1Sentences" class="subtabcontent">
+    <p>Örnek cümleler buraya gelecek...</p>
+  </div>  <!-- Quiz -->  <div id="Quiz" class="subtabcontent">
+    <p>Quiz alanı buraya gelecek...</p>
+  </div>
+</div><script>
+// Üst Sekmeler
+function openTab(evt, tabName){
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for(i=0;i<tabcontent.length;i++){tabcontent[i].style.display="none";}
+  tablinks = document.getElementsByClassName("tablinks");
+  for(i=0;i<tablinks.length;i++){tablinks[i].className = tablinks[i].className.replace(" active","");}
+  document.getElementById(tabName).style.display="block";
+  evt.currentTarget.className+=" active";
+}
+document.getElementById("defaultOpen").click();
+
+// Alt Sekmeler
+function openSubTab(evt, subTabName){
+  var i, subcontent, sublinks;
+  subcontent = document.getElementsByClassName("subtabcontent");
+  for(i=0;i<subcontent.length;i++){subcontent[i].style.display="none";}
+  sublinks = document.getElementsByClassName("subtablinks");
+  for(i=0;i<sublinks.length;i++){sublinks[i].className = sublinks[i].className.replace(" active","");}
+  document.getElementById(subTabName).style.display="block";
+  evt.currentTarget.className+=" active";
+}
+document.getElementById("defaultSub").click();
+
+function openSubTabById(subTabName){
+  const evt={currentTarget:null};
+  const sublinks=document.getElementsByClassName("subtablinks");
+  for(let i=0;i<sublinks.length;i++){
+    if(sublinks[i].innerText.includes('A1 Kelimeler')){evt.currentTarget=sublinks[i]; break;}
+  }
+  openSubTab(evt,subTabName);
+}
+</script></body>
+</html>
