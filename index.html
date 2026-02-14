@@ -5,162 +5,223 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mein Weg – Derya</title>
 <style>
-  /* Temel Stil */
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a3d62; /* Koyu mavi arka plan */
-    color: #fff;
-    overflow-x: hidden;
-  }
-  /* Header ve Menü */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #0a3d62;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  }
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-  }
-  nav {
-    position: relative;
-  }
+/* Genel Stil */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #1f4f8b; /* Açık mavi arka plan */
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Header ve Menü */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1f4f8b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+nav {
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+ul.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+ul.nav-links li {
+  margin-left: 20px;
+  position: relative;
+}
+
+ul.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Alt menü */
+ul.nav-links li ul {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: #1f4f8b;
+  list-style: none;
+  padding: 10px 0;
+  min-width: 150px;
+  border-radius: 5px;
+}
+
+ul.nav-links li:hover ul {
+  display: block;
+}
+
+ul.nav-links li ul li {
+  margin: 0;
+  padding: 5px 15px;
+}
+
+ul.nav-links li ul li a {
+  color: #fff;
+  font-weight: normal;
+}
+
+/* Hamburger Menü Mobil */
+@media (max-width: 768px) {
   .menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
+    display: block;
   }
   ul.nav-links {
-    list-style: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #1f4f8b;
+    width: 200px;
+    display: none;
+    padding: 10px 0;
+  }
+  ul.nav-links.show {
     display: flex;
-    margin: 0;
-    padding: 0;
   }
   ul.nav-links li {
-    margin-left: 20px;
+    margin: 10px 0;
   }
-  ul.nav-links li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-  }
-  /* Hamburger Menü Mobil */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-    }
-    ul.nav-links {
-      flex-direction: column;
-      position: absolute;
-      top: 50px;
-      right: 0;
-      background: #0a3d62;
-      width: 200px;
-      display: none;
-      padding: 10px 0;
-    }
-    ul.nav-links li {
-      margin: 10px 0;
-      text-align: center;
-    }
-    ul.nav-links.show {
-      display: flex;
-    }
-  }
-
-  /* Ana Sayfa */
-  .home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  ul.nav-links li ul {
     position: relative;
-    text-align: center;
+    top: 0;
   }
-  .typewriter {
-    font-size: 48px;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: .15em solid #fff;
-    animation: typing 3s steps(20) 1 forwards, blink 0.75s step-end infinite;
-  }
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 21ch; }
-  }
-  @keyframes blink {
-    50% { border-color: transparent; }
-  }
-  .motivation {
-    font-size: 20px;
-    margin-top: 20px;
-  }
+}
 
-  /* Su kabarcıkları */
-  .bubble {
-    position: absolute;
-    bottom: -50px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 50%;
-    animation: rise 8s linear infinite;
-  }
-  @keyframes rise {
-    0% { transform: translateY(0) scale(1);}
-    50% { transform: translateY(-300px) scale(1.2);}
-    100% { transform: translateY(-600px) scale(1);}
-  }
+/* Ana Sayfa */
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
 
-  /* Sekme içerikleri */
-  section {
-    padding: 100px 20px 50px 20px;
-    min-height: 100vh;
-  }
-  .section-title {
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: #fff;
-  }
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  .card {
-    background: #1e5799;
-    padding: 15px;
-    border-radius: 10px;
-    flex: 1 1 200px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .card:hover {
-    transform: scale(1.05);
-  }
-  .card span {
-    display: block;
-    margin-top: 10px;
-    font-size: 18px;
-  }
+.typewriter {
+  font-size: 48px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: .15em solid #fff;
+  animation: typing 3s steps(20) 1 forwards, blink 0.75s step-end infinite;
+}
 
-  /* Quiz ve oyunlar basit stiller */
-  .quiz, .game {
-    background: #1e5799;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
+@keyframes typing { from { width: 0; } to { width: 21ch; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+.motivation {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/* Su kabarcıkları */
+.bubble {
+  position: absolute;
+  bottom: -50px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(255,255,255,0.2));
+  border-radius: 50%;
+  animation: rise 6s linear infinite, swing 3s ease-in-out infinite;
+}
+
+@keyframes rise {
+  0% { transform: translateY(0) scale(1); opacity:0; }
+  50% { opacity:0.7; }
+  100% { transform: translateY(-600px) scale(1); opacity:0; }
+}
+
+@keyframes swing {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+/* Sekme içerikleri */
+section {
+  padding: 100px 20px 50px 20px;
+  min-height: 100vh;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background: #2b6cb0;
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card span {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.quiz, .game {
+  background: #2b6cb0;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+button {
+  margin:5px;
+  padding:10px 15px;
+  cursor:pointer;
+  border:none;
+  border-radius:5px;
+  background:#1f78d1;
+  color:#fff;
+  font-weight:bold;
+}
+
+button:hover { background:#155d8b; }
 
 </style>
 </head>
@@ -173,13 +234,31 @@
     <ul class="nav-links">
       <li><a href="#home">Anasayfa</a></li>
       <li><a href="#about">Hakkımda</a></li>
-      <li><a href="#words">Kelimeler</a></li>
-      <li><a href="#quiz">Quiz</a></li>
-      <li><a href="#flashcards">Hafıza Kartları</a></li>
+      <li>
+        <a href="#words">Kelimeler ▼</a>
+        <ul>
+          <li><a href="#words">Kartlar</a></li>
+          <li><a href="#flashcards">Hafıza Kartları</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+        </ul>
+      </li>
       <li><a href="#favorites">Favoriler</a></li>
-      <li><a href="#games">Oyunlar</a></li>
-      <li><a href="#progress">İlerleme</a></li>
+      <li>
+        <a href="#games">Oyunlar ▼</a>
+        <ul>
+          <li><a href="#games">Hafıza Oyunu</a></li>
+          <li><a href="#games">Artikel Oyunu</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#progress">İlerleme ▼</a>
+        <ul>
+          <li><a href="#progress">Günlük</a></li>
+          <li><a href="#progress">Haftalık</a></li>
+        </ul>
+      </li>
       <li><a href="#resources">Kaynaklar</a></li>
+      <li><a href="#extras">Ekstra / Notlar</a></li>
     </ul>
   </nav>
 </header>
@@ -219,6 +298,16 @@
   </div>
 </section>
 
+<!-- Hafıza Kartları -->
+<section id="flashcards">
+  <div class="section-title">Hafıza Kartları</div>
+  <div class="cards">
+    <div class="card" onclick="speak('Apfel')">der Apfel<span>Elma</span></div>
+    <div class="card" onclick="speak('Buch')">das Buch<span>Kitap</span></div>
+    <div class="card" onclick="speak('Stift')">der Stift<span>Kalem</span></div>
+  </div>
+</section>
+
 <!-- Quiz -->
 <section id="quiz">
   <div class="section-title">Quiz</div>
@@ -227,16 +316,6 @@
     <button onclick="alert('Doğru!')">Adam</button>
     <button onclick="alert('Yanlış!')">Kadın</button>
     <button onclick="alert('Yanlış!')">Ev</button>
-  </div>
-</section>
-
-<!-- Hafıza Kartları -->
-<section id="flashcards">
-  <div class="section-title">Hafıza Kartları</div>
-  <div class="cards">
-    <div class="card" onclick="speak('Apfel')">der Apfel<span>Elma</span></div>
-    <div class="card" onclick="speak('Buch')">das Buch<span>Kitap</span></div>
-    <div class="card" onclick="speak('Stift')">der Stift<span>Kalem</span></div>
   </div>
 </section>
 
@@ -268,6 +347,12 @@
     <li>DW Learn German</li>
     <li>A1 Kitapları</li>
   </ul>
+</section>
+
+<!-- Ekstra / Notlar -->
+<section id="extras">
+  <div class="section-title">Ekstra / Notlar</div>
+  <p>Kendi notlarınızı buraya ekleyebilirsiniz.</p>
 </section>
 
 <script>
